@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 p-5">
+            <div class="text-center text-primary fs-1">Fbook</div>
+        </div>
+
+        <div class="col-12 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 rounded-3 p-4 shadow-sm bg-light">
+
+                    <h4 class="text-center text-secondary mb-5">Register</h4>
+                    <form class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="fname" class="form-label">First Name</label>
+                            <input type="text" id="fname" class="form-control" required name="fname" />
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="lname" class="form-label">Last Name</label>
+                            <input type="text" id="lname" class="form-control" required name="lname" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" id="email" class="form-control" required name="email" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" required name="password" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cpassword" class="form-label">Confirm Password</label>
+                            <input type="cpassword" id="password" class="form-control" required name="cpassword" />
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <!-- register -->
+                            <div>Already have an account? <a [routerLink]="['/login']" class="link-info">Login</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
