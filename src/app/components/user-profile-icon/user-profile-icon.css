@@ -5,6 +5,10 @@
     font-size: 15px;
 }
 
+.size-small:hover {
+    box-shadow: 0 0 0 1px rgb(217, 0, 255);
+}
+
 .size-large {
     width: 150px;
     height: 150px;

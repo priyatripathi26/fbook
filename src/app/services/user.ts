@@ -29,6 +29,10 @@ export class User {
     }
   }
 
+  updateUser(id: number, changedData: any) {
+    return this.http.patch<any>(`/api/users/${id}`, changedData);
+  }
+
   register(user: any) {
     user.role = 'user';
     user.blocked = false;
