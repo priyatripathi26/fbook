@@ -2,11 +2,13 @@
   "name": "fbook",
   "version": "0.0.0",
   "scripts": {
+    "start": "npm-run-all --parallel json:server ng:serve",
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "json:server": "json-server --watch json-server/db.json --port 3000",
+    "ng:serve": "ng serve --proxy-config proxy.conf.json"
   },
   "prettier": {
     "printWidth": 100,
@@ -39,11 +41,13 @@
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.9.0",
+    "json-server": "^1.0.0-beta.3",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "~5.9.2"
   }
 }
