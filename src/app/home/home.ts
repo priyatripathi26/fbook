@@ -15,7 +15,7 @@ export class Home {
     private router: Router
   ) {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
   }
 }

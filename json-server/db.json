@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "first_name": "Priya",
       "last_name": "Tripathi",
       "email": "priya@example.com",
-      "password": "12345678",
+      "password": "765432",
       "profile_picture": "https://plus.unsplash.com/premium_photo-1664298528358-790433ba0815",
       "role": "admin",
       "blocked": false,

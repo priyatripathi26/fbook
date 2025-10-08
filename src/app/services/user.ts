@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,29 @@ export class User {
 
   checkEmailExists(email: string) {
     return this.http.get<any[]>(`/api/users?email=${email}`);
+  }
+
+  resetPassword(user: { email: string; password: string }): Observable<any> {
+    const { email, password } = user;
+
+    if (!email || !password) {
+      return throwError(() => new Error('Email and password are required'));
+    }
+
+    return this.checkEmailExists(email.trim()).pipe(
+      switchMap(existing => {
+        if (existing.length === 0) {
+          return throwError(() => new Error('Email does not exist'));
+        }
+
+        const userData = existing[0];
+        return this.http.patch<any>(
+          `http://localhost:3000/users/${userData.id}`,
+          { password: password }
+        );
+      }),
+      catchError(err => throwError(() => err))
+    );
   }
 
 }
