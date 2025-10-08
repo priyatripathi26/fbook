@@ -33,9 +33,4 @@ export class Auth {
     }
     return false;
   }
-
-  getUsers() {
-    return this.http.get('/api/users');
-  }
-
 }

@@ -1,27 +1,53 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "first_name": "Priya",
-            "last_name": "Tripathi",
-            "email": "priya@example.com",
-            "password": "12345678",
-            "profile_picture": "https://plus.unsplash.com/premium_photo-1664298528358-790433ba0815",
-            "role": "admin",
-            "blocked": false,
-            "friends": [],
-            "sent_friend_requests": [],
-            "received_friend_requests": []
-        }
-    ],
-    "posts": [
-        {
-            "id": 101,
-            "text": "Local JSON Server Setup",
-            "image": "https://json-server.typicode.com/typicode/demo/posts",
-            "userId": 1,
-            "timestamp": 1759921724,
-            "likesUserIds": []
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Priya",
+      "last_name": "Tripathi",
+      "email": "priya@example.com",
+      "password": "12345678",
+      "profile_picture": "https://plus.unsplash.com/premium_photo-1664298528358-790433ba0815",
+      "role": "admin",
+      "blocked": false,
+      "friends": [],
+      "sent_friend_requests": [],
+      "received_friend_requests": []
+    },
+    {
+      "id": "fbc3",
+      "first_name": "Vinayak",
+      "last_name": "Tripathi",
+      "email": "vin@example.com",
+      "password": "123456",
+      "role": "user",
+      "blocked": false,
+      "profile_picture": "",
+      "friends": [],
+      "sent_friend_requests": [],
+      "received_friend_requests": []
+    },
+    {
+      "id": "4099",
+      "first_name": "pr",
+      "last_name": "tr",
+      "email": "priya1@example.com",
+      "password": "123456",
+      "role": "user",
+      "blocked": false,
+      "profile_picture": "",
+      "friends": [],
+      "sent_friend_requests": [],
+      "received_friend_requests": []
+    }
+  ],
+  "posts": [
+    {
+      "id": 101,
+      "text": "Local JSON Server Setup",
+      "image": "https://json-server.typicode.com/typicode/demo/posts",
+      "userId": 1,
+      "timestamp": 1759921724,
+      "likesUserIds": []
+    }
+  ]
 }

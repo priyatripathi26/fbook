@@ -10,34 +10,71 @@
                 <div class="col-md-6 rounded-3 p-4 shadow-sm bg-light">
 
                     <h4 class="text-center text-secondary mb-5">Register</h4>
-                    <form class="row">
+                    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="row">
                         <div class="mb-3 col-md-6">
                             <label for="fname" class="form-label">First Name</label>
-                            <input type="text" id="fname" class="form-control" required name="fname" />
+                            <input type="text" id="fname" class="form-control" required name="fname" [(ngModel)]="fname"
+                                (input)="onInput()"  #fnameField="ngModel" />
+
+                            <div *ngIf="fnameField.invalid && (fnameField.dirty || fnameField.touched)"
+                                class="text-danger mt-1">
+                                <small *ngIf="fnameField.errors?.['required']">First name is required.</small>
+                            </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="lname" class="form-label">Last Name</label>
-                            <input type="text" id="lname" class="form-control" required name="lname" />
+                            <input type="text" id="lname" class="form-control" required name="lname" [(ngModel)]="lname"
+                                (input)="onInput()" #lnameField="ngModel" />
+                            <div *ngIf="lnameField.invalid && (lnameField.dirty || lnameField.touched)"
+                                class="text-danger mt-1">
+                                <small *ngIf="emailField.errors?.['required']">Last name is required.</small>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" id="email" class="form-control" required name="email" />
+                            <input type="email" id="email" class="form-control" email required name="email"
+                                [(ngModel)]="email" (input)="onInput()" #emailField="ngModel" />
+                            <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
+                                class="text-danger mt-1">
+                                <small *ngIf="emailField.errors?.['required']">Email is required.</small>
+                                <small *ngIf="emailField.errors?.['email']">Enter a valid email address.</small>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" class="form-control" required name="password" />
+                            <input type="password" id="password" class="form-control" required minlength="6"
+                                name="password" [(ngModel)]="password" (input)="onInput()" #passwordField="ngModel" />
+                            <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
+                                class="text-danger mt-1">
+                                <small *ngIf="passwordField.errors?.['required']">Password is required.</small>
+                                <small *ngIf="passwordField.errors?.['minlength']">Password must be at least 6
+                                    characters.</small>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="cpassword" class="form-label">Confirm Password</label>
-                            <input type="cpassword" id="password" class="form-control" required name="cpassword" />
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                            <!-- register -->
-                            <div>Already have an account? <a [routerLink]="['/login']" class="link-info">Login</a>
+                            <input type="password" id="cpassword" class="form-control" required minlength="6"
+                                name="cpassword" [(ngModel)]="cpassword" (input)="onInput()"
+                                #cPasswordField="ngModel" />
+                            <div *ngIf="cPasswordField.invalid && (cPasswordField.dirty || cPasswordField.touched)"
+                                class="text-danger mt-1">
+                                <small *ngIf="cPasswordField.errors?.['required']"><br>Password is required.</small>
+                                <small *ngIf="cPasswordField.errors?.['minlength']"><br>Password must be at least 6
+                                    characters.</small>
+                                <small *ngIf="cpassword !== password" class="w-100"><br>Password does not match.</small>
                             </div>
                         </div>
+
+                        <p class="text-danger">{{ errorMsg }}</p>
+                        <p class="text-success">{{ successMsg }}</p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="registerForm.invalid">Register</button>
+                            <div>Already have an account? <a [routerLink]="['/login']" class="link-info">Login</a></div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div>
