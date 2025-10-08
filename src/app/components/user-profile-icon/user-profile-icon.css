@@ -1,0 +1,13 @@
+.size-small {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+}
+
+.size-large {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 80px;
+}

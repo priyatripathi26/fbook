@@ -15,6 +15,20 @@ export class User {
     return this.http.get('/api/users');
   }
 
+  getCurrentUser() {
+    let user = localStorage.getItem('loggedInUser');
+    if (!user) {
+      return null;
+    } else {
+      let userData = JSON.parse(user);
+      if(userData && userData.id) {
+        return this.http.get<any[]>(`/api/users/${userData.id}`);
+      } else {
+        return null;
+      }
+    }
+  }
+
   register(user: any) {
     user.role = 'user';
     user.blocked = false;

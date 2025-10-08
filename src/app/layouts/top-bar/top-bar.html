@@ -1,0 +1,32 @@
+<nav class="navbar border-bottom border-primary bg-white shadow-sm " data-bs-theme="light">
+    <div class="container-fluid">
+        <a class="navbar-brand text-primary fs-2">Fbook</a>
+
+        <div>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-house-heart"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="bi bi-person-hearts"></i> Network</a>
+                </li>
+                <li class="nav-item" *ngIf="isAdmin">
+                    <a class="nav-link" href="#"><i class="bi bi-person-lines-fill"></i> Users</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-expanded="false">
+                        <app-user-profile-icon [user]="user"></app-user-profile-icon>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Setting <i class="ms-3 bi bi-gear"></i></a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" (click)="logout()" href="#">Logout <i class="ms-3 bi bi-box-arrow-right"></i></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Auth } from '../services/auth';
 import { Router } from '@angular/router';
+import { TopBar } from '../layouts/top-bar/top-bar';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [TopBar],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

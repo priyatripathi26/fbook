@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class Auth {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   login(email: string, password: string) {
@@ -21,6 +23,7 @@ export class Auth {
 
   logout() {
     localStorage.removeItem('loggedInUser');
+     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
