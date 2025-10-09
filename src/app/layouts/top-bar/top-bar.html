@@ -20,10 +20,10 @@
                         <app-user-profile-icon [user]="user"></app-user-profile-icon>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item d-flex justify-content-between" [routerLink]="['/setting']">My Posts <i class="ms-3 bi bi-view-list"></i></a></li>
+                        <li><a class="dropdown-item d-flex justify-content-between" [routerLink]="['/my-posts']">My Posts <i class="ms-3 bi bi-view-list"></i></a></li>
                         @if(user?.role == 'admin') {
                             <li>
-                                <a class="dropdown-item  d-flex justify-content-between" href="#">All Posts <i class="bi bi-stickies ms-3"></i></a>
+                                <a class="dropdown-item  d-flex justify-content-between"  [routerLink]="['/posts']">All Posts <i class="bi bi-stickies ms-3"></i></a>
                             </li>
                             <li>
                                 <a class="dropdown-item  d-flex justify-content-between" href="#">Users <i class="bi bi-person-lines-fill ms-3"></i></a>

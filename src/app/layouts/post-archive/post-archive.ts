@@ -12,6 +12,7 @@ import { CreatePost } from "../create-post/create-post";
 })
 export class PostArchive {
   @Input() isSelf: boolean = false;
+  @Input() canCreatePost: boolean = true;
   currentUserId: any = null;
   posts: any[] = [];
 
