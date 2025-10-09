@@ -34,6 +34,10 @@ export class Login {
       next: (user: any) => {
         console.log(user);
         if (user && user[0] && user[0].id) {
+          if (user[0].blocked) {
+            this.errorMsg = 'Your account has been blocked. Please contact the administrator.';
+            return;
+          }
           localStorage.setItem('loggedInUser', JSON.stringify(user[0]));
           this.errorMsg = '';
           this.router.navigate(['/']);

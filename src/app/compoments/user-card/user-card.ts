@@ -38,8 +38,69 @@ export class UserCard {
     });
   }
 
-  unblockUser() { }
-  blockUser() { }
-  confirmRes(status: boolean) { }
+  unblockUser() {
+    this.resetConfirmation();
+    if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id || this.currentUser.role != 'admin') return;
+    this.confirmationMassege = 'Are you sure you want to unblock this user?';
+    this.danger = false;
+    this.unblockingUser = true;
+  }
+
+  blockUser() {
+    this.resetConfirmation();
+    if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id || this.currentUser.role != 'admin') return;
+    this.confirmationMassege = 'Are you sure you want to block this user?';
+    this.danger = true
+    this.blockingUser = true;
+  }
+
+  confirmRes(event: boolean) {
+    console.log('Confirmation result:', event);
+    this.danger = false;
+    this.confirmationMassege = '';
+    if (event) {
+      if (this.blockingUser) {
+        this.resetConfirmation();
+        this.blockUserApi();
+      }
+      if (this.unblockingUser) {
+        this.resetConfirmation();
+        this.unblockUserApi();
+      }
+    }
+
+    this.resetConfirmation();
+  }
+
+  blockUserApi() {
+    let userData = { blocked: true };
+    this.userService.updateUser(this.user.id, userData).subscribe({
+      next: (updatedUser) => {
+        this.user = updatedUser;
+      },
+      error: (error) => {
+        console.error('Error blocking user:', error);
+      }
+    });
+  }
+
+  unblockUserApi() {
+    let postData = { blocked: false };
+    this.userService.updateUser(this.user.id, postData).subscribe({
+      next: (updatedUser) => {
+        this.user = updatedUser;
+      },
+      error: (error) => {
+        console.error('Error blocking user:', error);
+      }
+    });
+  }
+
+  resetConfirmation() {
+    this.confirmationMassege = '';
+    this.danger = false;
+    this.blockingUser = false;
+    this.unblockingUser = false;
+  }
 
 }

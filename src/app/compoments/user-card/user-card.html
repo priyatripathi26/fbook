@@ -8,6 +8,15 @@
                     <h6 class="mb-0">{{ user?.first_name }} {{ user?.last_name }}</h6>
                 </div>
             </div>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+                @if(user.blocked && currentUser.role == 'admin') {
+                <span data-bs-toggle="tooltip" data-bs-placement="top" title="This user
+                    has been blocked by admin!" class="text-danger me-3">
+                    <span class="text-secondary me-2">Blocked</span>
+                    <i class="bi bi-ban"></i>   
+                </span>
+                }
+            </div>
         </div>
 
         <div class="mt-2 w-100 d-flex flex-wrap border-top pt-2">
@@ -15,13 +24,13 @@
                 @if(currentUser.role == 'admin') {
 
                 @if(user.blocked) {
-                <a href="#" (click)="$event.preventDefault(); unblockUser()" class="text-decoration-none text-success">
-                    <i class="bi bi-ban"></i>
+                <a href="#" (click)="$event.preventDefault(); unblockUser()" class="text-decoration-none btn btn-sm btn-outline-success">
+                    <i class="bi bi-check2-square"> Unblock User</i>
                 </a>
                 } @else {
                 <a href="#" (click)="$event.preventDefault(); blockUser()"
-                    class="text-decoration-none text-info danger">
-                    <i class="bi bi-ban"></i>
+                    class="text-decoration-none btn btn-sm btn-outline-danger">
+                    <i class="bi bi-ban"></i> Block User
                 </a>
                 }
                 }
