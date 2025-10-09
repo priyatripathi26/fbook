@@ -11,6 +11,7 @@ import { User } from '../../services/user';
 export class UsersArchive {
   @Input() isRecivedRequest: boolean = false;
   @Input() isSentRequest: boolean = false;
+  @Input() isFriend: boolean = false;
   @Input() isAllUsers: boolean = false;
 
   currentUserId: any = null;
@@ -22,7 +23,6 @@ export class UsersArchive {
   ) { }
 
   ngOnChanges(): void {
-    console.log(this.isRecivedRequest, this.isSentRequest, this.isAllUsers);
   }
 
   ngOnInit() {
@@ -47,15 +47,16 @@ export class UsersArchive {
       this.allUsers = [];
       return;
     }
-    if (this.isAllUsers) {
+    this.userService.getAllUsers().subscribe(users => {
+      this.allUsers = users.filter((user: any) => user.id !== this.currentUserId) || [];
+      if(this.isFriend){
+        this.allUsers = this.allUsers.filter((user: any) => this.currentUser.friends?.includes(user.id)) || [];
+      }
+    }, error => {
+      this.allUsers = [];
+      console.error('Error fetching users:', error);
+    });
 
-      this.userService.getAllUsers().subscribe(users => {
-        this.allUsers = users.filter((user: any) => user.id !== this.currentUserId) || [];
-      }, error => {
-        this.allUsers = [];
-        console.error('Error fetching users:', error);
-      });
-    }
 
   }
 }

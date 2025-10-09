@@ -13,8 +13,11 @@
                 <span data-bs-toggle="tooltip" data-bs-placement="top" title="This user
                     has been blocked by admin!" class="text-danger me-3">
                     <span class="text-secondary me-2">Blocked</span>
-                    <i class="bi bi-ban"></i>   
+                    <i class="bi bi-ban"></i>
                 </span>
+                }
+                @if(currentUser?.friends?.includes(user?.id)) {
+                <i class="bi bi-person-check text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Friend"></i>
                 }
             </div>
         </div>
@@ -24,16 +27,43 @@
                 @if(currentUser.role == 'admin') {
 
                 @if(user.blocked) {
-                <a href="#" (click)="$event.preventDefault(); unblockUser()" class="text-decoration-none btn btn-sm btn-outline-success">
+                <a href="#" (click)="$event.preventDefault(); unblockUser()"
+                    class="text-decoration-none btn btn-sm btn-outline-success me-1">
                     <i class="bi bi-check2-square"> Unblock User</i>
                 </a>
                 } @else {
                 <a href="#" (click)="$event.preventDefault(); blockUser()"
-                    class="text-decoration-none btn btn-sm btn-outline-danger">
+                    class="text-decoration-none btn btn-sm btn-outline-danger me-1">
                     <i class="bi bi-ban"></i> Block User
                 </a>
                 }
                 }
+
+                @if(currentUser?.friends?.includes(user?.id)) {
+                <a href="#" (click)="$event.preventDefault(); unfriend()"
+                    class="text-decoration-none btn btn-sm btn-outline-secondary me-1">
+                    <i class="bi bi-person-x"></i> Unfriend
+                </a>
+                } @else if(currentUser?.sent_friend_requests?.includes(user?.id)) { 
+                <a href="#" (click)="$event.preventDefault(); cancelRequest()"
+                    class="text-decoration-none btn btn-sm btn-outline-warning">
+                    <i class="bi bi-person-dash"></i> Cancel Request 
+                </a>
+                } @else if(currentUser?.received_friend_requests?.includes(user?.id)) {
+                <a href="#" (click)="$event.preventDefault(); acceptRequest()"
+                    class="text-decoration-none btn btn-sm btn-outline-success me-2">
+                    <i class="bi bi-person-check"></i> Accept Request
+                </a>
+                <a href="#" (click)="$event.preventDefault(); declineRequest()"
+                    class="text-decoration-none btn btn-sm btn-outline-danger">
+                    <i class="bi bi-person-x"></i> Decline Request
+                </a>
+                } @else {
+                <a href="#" (click)="$event.preventDefault(); sendRequest()"
+                    class="text-decoration-none btn btn-sm btn-outline-primary">
+                    <i class="bi bi-person-plus"></i> Add Friend   
+                </a>
+                }   
             </div>
         </div>
     </div>

@@ -54,6 +54,37 @@ export class UserCard {
     this.blockingUser = true;
   }
 
+  unfriend(){
+    if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id) return;
+    let updatedCurrentUserFriends = this.currentUser.friends?.filter((id: any) => id !== this.user.id) || [];
+    let updatedUserFriends = this.user.friends?.filter((id: any) => id !== this.currentUser.id) || [];
+
+    this.userService.updateUser(this.currentUser.id, { friends: updatedCurrentUserFriends }).subscribe({
+      next: (updatedCurrentUser) => {
+        this.currentUser = updatedCurrentUser; 
+        this.userService.updateUser(this.user.id, { friends: updatedUserFriends }).subscribe({
+          next: (updatedUser) => {
+            this.user = updatedUser; 
+          },
+          error: (error) => {
+            console.error('Error updating user friends:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error updating current user friends:', error);
+      }
+    });
+  }
+
+  cancelRequest(){}
+
+  acceptRequest(){}
+
+  declineRequest(){}
+  
+  sendRequest(){}
+
   confirmRes(event: boolean) {
     console.log('Confirmation result:', event);
     this.danger = false;
