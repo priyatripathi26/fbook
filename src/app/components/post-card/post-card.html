@@ -1,3 +1,4 @@
+@if( !post.hidden || post.userId == currentUser.id || currentUser.role == 'admin'){
 @if(!isEditing) {
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
     <div class="d-flex flex-wrap w-100 post-wrapper">
@@ -9,7 +10,13 @@
                     <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp | date:'medium' }}</small>
                 </div>
             </div>
-            <div>
+            <div class="d-flex flex-wrap justify-content-end align-items-center">
+                @if(post.hidden) {
+                <span data-bs-toggle="tooltip" data-bs-placement="top" title="This post is hidden for other users!"
+                    class="text-secondary me-3">
+                    <i class="bi bi-eye-slash"></i>
+                </span>
+                }
                 @if (author.id == currentUser.id || currentUser.role == 'admin') {
                 <div class="dropdown">
                     <span id="dropdownMenuButton1" class="text-primary" role="button" data-bs-toggle="dropdown"
@@ -21,10 +28,12 @@
                         <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted"
                                 (click)="isEditing=true">Edit <i class="bi bi-pencil"></i></a></li>
                         @if(post.hidden) {
-                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Unhide
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
+                                (click)="$event.preventDefault(); unhidePost()">Unhide
                                 <i class="bi bi-eye"></i></a></li>
                         } @else {
-                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Hide
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
+                                (click)="$event.preventDefault(); hidePost()">Hide
                                 <i class="bi bi-eye-slash"></i></a></li>
                         }
                         }
@@ -66,5 +75,11 @@
     </div>
 </div>
 } @else {
-    <app-edit-post [post]="post" (close)="editCancel($event)" (newPost)="newPost($event)"></app-edit-post>
+<app-edit-post [post]="post" (close)="editCancel($event)" (newPost)="newPost($event)"></app-edit-post>
+}
+
+@if(hidingPost || unhidingPost) {
+<app-confirmation-modal [message]="confirmationMassege" [isDanger]="danger"
+    (isConfirmed)="confirmRes($event)"></app-confirmation-modal>
+}
 }

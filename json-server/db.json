@@ -77,7 +77,7 @@
         "2",
         "1"
       ],
-      "hidden": false,
+      "hidden": true,
       "blocked": false
     },
     {
@@ -89,7 +89,7 @@
       "likesUserIds": [
         "1"
       ],
-      "hidden": false,
+      "hidden": true,
       "blocked": false
     },
     {

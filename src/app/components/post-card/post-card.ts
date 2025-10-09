@@ -4,10 +4,11 @@ import { UserProfileIcon } from '../user-profile-icon/user-profile-icon';
 import { DatePipe } from '@angular/common';
 import { Post } from '../../services/post';
 import { EditPost } from '../edit-post/edit-post';
+import { ConfirmationModal } from '../confirmation-modal/confirmation-modal';
 
 @Component({
   selector: 'app-post-card',
-  imports: [UserProfileIcon, DatePipe, EditPost],
+  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css'
 })
@@ -17,7 +18,10 @@ export class PostCard {
   author: any = {};
   isEditing: boolean = false;
   currentUser: any = {};
-
+  hidingPost: boolean = false;
+  unhidingPost: boolean = false;
+  confirmationMassege: string = '';
+  danger: boolean = false;
   constructor(
     private userService: User,
     private postService: Post
@@ -78,7 +82,7 @@ export class PostCard {
   editCancel(event: boolean) {
     this.isEditing = false;
 
-    if(!event) {
+    if (!event) {
       this.post = { ...this.initialPost };
     }
   }
@@ -86,6 +90,72 @@ export class PostCard {
   newPost(event: any) {
     this.post = event;
     this.isEditing = false;
+  }
+
+  hidePost() {
+    this.resetConfirmation();
+    if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || this.currentUser.id != this.post.userId) return;
+    this.confirmationMassege = 'Are you sure you want to hide this post?';
+    this.danger = true
+    this.hidingPost = true;
+  }
+
+  unhidePost() {
+    this.resetConfirmation();
+    if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || this.currentUser.id != this.post.userId) return;
+    this.confirmationMassege = 'Are you sure you want to show this post?';
+    this.danger = false
+    this.unhidingPost = true;
+  }
+
+  confirmRes(event: boolean) {
+    console.log('Confirmation result:', event);
+    this.danger = false;
+    this.confirmationMassege = '';
+    if (event) {
+      if (this.hidingPost) {
+        this.resetConfirmation();
+        this.hidePostApi();
+      }
+      if (this.unhidingPost) {
+        this.resetConfirmation();
+        this.unhidePostApi();
+      }
+    }
+
+    this.resetConfirmation();
+  }
+
+  hidePostApi() {
+    let postData = { hidden: true };
+    this.postService.updatePost(this.post.id, postData).subscribe({
+      next: (updatedPost) => {
+        this.post = updatedPost;
+      },
+      error: (error) => {
+        console.error('Error hiding post:', error);
+      }
+    });
+  }
+
+   unhidePostApi() {
+    let postData = { hidden: false };
+    this.postService.updatePost(this.post.id, postData).subscribe({
+      next: (updatedPost) => {
+        this.post = updatedPost;
+      },
+      error: (error) => {
+        console.error('Error hiding post:', error);
+      }
+    });
+  }
+
+
+  resetConfirmation() {
+    this.hidingPost = false;
+    this.unhidingPost = false;
+    this.confirmationMassege = '';
+    this.danger = false;
   }
 
 }
