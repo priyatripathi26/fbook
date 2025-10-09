@@ -52,11 +52,16 @@ export class UsersArchive {
       if(this.isFriend){
         this.allUsers = this.allUsers.filter((user: any) => this.currentUser.friends?.includes(user.id)) || [];
       }
+      if(this.isRecivedRequest){
+        this.allUsers = this.allUsers.filter((user: any) => this.currentUser.received_friend_requests?.includes(user.id)) || [];
+      }
+      if(this.isSentRequest){
+        this.allUsers = this.allUsers.filter((user: any) => this.currentUser.sent_friend_requests?.includes(user.id)) || [];
+      }
     }, error => {
       this.allUsers = [];
       console.error('Error fetching users:', error);
     });
-
 
   }
 }

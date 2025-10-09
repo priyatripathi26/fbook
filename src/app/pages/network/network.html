@@ -27,8 +27,16 @@
                         <app-users-archive class="w-100" [isFriend]="true"></app-users-archive>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="request" role="tabpanel" aria-labelledby="request-tab">...</div>
-                <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">...</div>
+                <div class="tab-pane fade" id="request" role="tabpanel" aria-labelledby="request-tab">
+                    <div class="w-100 pt-4">
+                        <app-users-archive class="w-100" [isRecivedRequest]="true"></app-users-archive>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+                    <div class="w-100 pt-4">
+                        <app-users-archive class="w-100" [isSentRequest]="true"></app-users-archive>
+                    </div>
+                </div>
                 <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
                     <div class="w-100 pt-4">
                         <app-users-archive class="w-100" [isAllUsers]="true"></app-users-archive>

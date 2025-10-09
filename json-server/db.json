@@ -25,7 +25,9 @@
       "blocked": false,
       "profile_picture": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
       "friends": [],
-      "sent_friend_requests": [],
+      "sent_friend_requests": [
+        "3"
+      ],
       "received_friend_requests": [
         "1"
       ]
@@ -41,7 +43,9 @@
       "profile_picture": "",
       "friends": [],
       "sent_friend_requests": [],
-      "received_friend_requests": []
+      "received_friend_requests": [
+        "2"
+      ]
     }
   ],
   "posts": [
