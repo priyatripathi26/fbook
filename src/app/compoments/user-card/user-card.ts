@@ -129,7 +129,27 @@ export class UserCard {
     });
   }
 
-  declineRequest(){}
+  declineRequest(){
+    if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id) return;
+    let updatedCurrentUserReceivedRequests = this.currentUser.received_friend_requests?.filter((id: any) => id !== this.user.id) || [];
+    let updatedUserSentRequests = this.user.sent_friend_requests?.filter((id: any) => id !== this.currentUser.id) || [];
+    this.userService.updateUser(this.currentUser.id, { received_friend_requests: updatedCurrentUserReceivedRequests }).subscribe({
+      next: (updatedCurrentUser) => {
+        this.currentUser = updatedCurrentUser;
+        this.userService.updateUser(this.user.id, { sent_friend_requests: updatedUserSentRequests }).subscribe({
+          next: (updatedUser) => {
+            this.user = updatedUser;
+          },
+          error: (error) => {
+            console.error('Error updating user sent requests:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error updating current user received requests:', error);
+      }
+    });
+  }
   
   sendRequest(){
     if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id) return;
