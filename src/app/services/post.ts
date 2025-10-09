@@ -27,4 +27,8 @@ export class Post {
     return this.http.post<any>(`/api/posts`, newPost);
   }
 
+  deletePost(id: any) {
+    return this.http.delete<any>(`/api/posts/${id}`);
+  }
+
 }

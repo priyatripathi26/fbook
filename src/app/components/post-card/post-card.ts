@@ -20,6 +20,7 @@ export class PostCard {
   currentUser: any = {};
   hidingPost: boolean = false;
   unhidingPost: boolean = false;
+  deletingPost: boolean = false;
   confirmationMassege: string = '';
   danger: boolean = false;
   constructor(
@@ -106,6 +107,14 @@ export class PostCard {
     this.confirmationMassege = 'Are you sure you want to show this post?';
     this.danger = false
     this.unhidingPost = true;
+  } 
+  
+  deletePost() {
+    this.resetConfirmation();
+    if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || (this.currentUser.id != this.post.userId && this.currentUser.role != 'admin' )) return;
+    this.confirmationMassege = 'Are you sure you want to delete this post?';
+    this.danger = true
+    this.deletingPost = true;
   }
 
   confirmRes(event: boolean) {
@@ -120,6 +129,10 @@ export class PostCard {
       if (this.unhidingPost) {
         this.resetConfirmation();
         this.unhidePostApi();
+      }
+      if (this.deletingPost) {
+        this.resetConfirmation();
+        this.deletePostApi();
       }
     }
 
@@ -149,7 +162,16 @@ export class PostCard {
       }
     });
   }
-
+  deletePostApi() {
+    this.postService.deletePost(this.post.id).subscribe({
+      next: (res) => {
+        this.post = null;
+      },
+      error: (error) => {
+        console.error('Error deleting post:', error);
+      }
+    });
+  }
 
   resetConfirmation() {
     this.hidingPost = false;

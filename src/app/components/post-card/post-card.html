@@ -1,4 +1,4 @@
-@if( !post.hidden || post.userId == currentUser.id || currentUser.role == 'admin'){
+@if( post && (!post.hidden || post.userId == currentUser.id || currentUser.role == 'admin')){
 @if(!isEditing) {
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
     <div class="d-flex flex-wrap w-100 post-wrapper">
@@ -41,7 +41,8 @@
                         <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Block
                                 <i class="bi bi-ban"></i></a></li>
                         }
-                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Delete
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
+                                (click)="$event.preventDefault(); deletePost()">Delete
                                 <i class="bi bi-trash"></i></a></li>
                     </ul>
                 </div>
@@ -78,7 +79,7 @@
 <app-edit-post [post]="post" (close)="editCancel($event)" (newPost)="newPost($event)"></app-edit-post>
 }
 
-@if(hidingPost || unhidingPost) {
+@if(hidingPost || unhidingPost || deletingPost) {
 <app-confirmation-modal [message]="confirmationMassege" [isDanger]="danger"
     (isConfirmed)="confirmRes($event)"></app-confirmation-modal>
 }
