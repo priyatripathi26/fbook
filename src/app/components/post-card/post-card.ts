@@ -21,6 +21,7 @@ export class PostCard {
   hidingPost: boolean = false;
   unhidingPost: boolean = false;
   deletingPost: boolean = false;
+  blockingPost: boolean = false;
   confirmationMassege: string = '';
   danger: boolean = false;
   constructor(
@@ -107,7 +108,17 @@ export class PostCard {
     this.confirmationMassege = 'Are you sure you want to show this post?';
     this.danger = false
     this.unhidingPost = true;
-  } 
+  }
+
+  blockPost() {
+    this.resetConfirmation();
+    console.log(this.post);
+    if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || this.currentUser.role != 'admin') return;
+    this.confirmationMassege = 'Are you sure you want to block this post?';
+    this.danger = true
+    this.blockingPost = true;
+  }
+  unblockPost() {}
   
   deletePost() {
     this.resetConfirmation();
@@ -134,6 +145,10 @@ export class PostCard {
         this.resetConfirmation();
         this.deletePostApi();
       }
+      if (this.blockingPost) {
+        this.resetConfirmation();
+        this.blockPostApi();
+      }
     }
 
     this.resetConfirmation();
@@ -151,6 +166,18 @@ export class PostCard {
     });
   }
 
+   blockPostApi() {
+    let postData = { blocked: true };
+    this.postService.updatePost(this.post.id, postData).subscribe({
+      next: (updatedPost) => {
+        this.post = updatedPost;
+      },
+      error: (error) => {
+        console.error('Error blocking post:', error);
+      }
+    });
+  }
+
    unhidePostApi() {
     let postData = { hidden: false };
     this.postService.updatePost(this.post.id, postData).subscribe({
@@ -158,7 +185,7 @@ export class PostCard {
         this.post = updatedPost;
       },
       error: (error) => {
-        console.error('Error hiding post:', error);
+        console.error('Error unhiding post:', error);
       }
     });
   }
@@ -176,6 +203,8 @@ export class PostCard {
   resetConfirmation() {
     this.hidingPost = false;
     this.unhidingPost = false;
+    this.deletingPost = false;
+    this.blockingPost = false;
     this.confirmationMassege = '';
     this.danger = false;
   }

@@ -1,4 +1,4 @@
-@if( post && (!post.hidden || post.userId == currentUser.id || currentUser.role == 'admin')){
+@if( post && ((!post.hidden && !post.blocked) || post.userId == currentUser.id || currentUser.role == 'admin')){
 @if(!isEditing) {
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
     <div class="d-flex flex-wrap w-100 post-wrapper">
@@ -11,6 +11,12 @@
                 </div>
             </div>
             <div class="d-flex flex-wrap justify-content-end align-items-center">
+                @if(post.blocked) {
+                <span data-bs-toggle="tooltip" data-bs-placement="top" title="This post has been blocked by admin!"
+                    class="text-danger me-3">
+                    <i class="bi bi-ban"></i>
+                </span>
+                }
                 @if(post.hidden) {
                 <span data-bs-toggle="tooltip" data-bs-placement="top" title="This post is hidden for other users!"
                     class="text-secondary me-3">
@@ -38,8 +44,18 @@
                         }
                         }
                         @if(currentUser.role == 'admin' && author.id != currentUser.id) {
-                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Block
+
+                        @if(post.blocked) {
+
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
+                                (click)="$event.preventDefault(); unblockPost()">Unblock
+                                <i class="bi bi-check2-square"></i></a></li>
+                        } @else {
+
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
+                                (click)="$event.preventDefault(); blockPost()">Block
                                 <i class="bi bi-ban"></i></a></li>
+                        }
                         }
                         <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#"
                                 (click)="$event.preventDefault(); deletePost()">Delete
@@ -79,7 +95,7 @@
 <app-edit-post [post]="post" (close)="editCancel($event)" (newPost)="newPost($event)"></app-edit-post>
 }
 
-@if(hidingPost || unhidingPost || deletingPost) {
+@if(hidingPost || unhidingPost || deletingPost || blockingPost) {
 <app-confirmation-modal [message]="confirmationMassege" [isDanger]="danger"
     (isConfirmed)="confirmRes($event)"></app-confirmation-modal>
 }
