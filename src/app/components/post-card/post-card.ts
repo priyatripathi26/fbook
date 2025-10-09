@@ -3,15 +3,17 @@ import { User } from '../../services/user';
 import { UserProfileIcon } from '../user-profile-icon/user-profile-icon';
 import { DatePipe } from '@angular/common';
 import { Post } from '../../services/post';
+import { EditPost } from '../edit-post/edit-post';
 
 @Component({
   selector: 'app-post-card',
-  imports: [UserProfileIcon, DatePipe],
+  imports: [UserProfileIcon, DatePipe, EditPost],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css'
 })
 export class PostCard {
   @Input() post: any;
+  initialPost: any;
   author: any = {};
   isEditing: boolean = false;
   currentUser: any = {};
@@ -22,7 +24,8 @@ export class PostCard {
   ) { }
 
   ngOnChanges() {
-    if( this.post && this.post.userId ) {
+    if (this.post && this.post.userId) {
+      this.initialPost = { ...this.post };
       this.getAuthor();
       this.getCurrentUser();
     }
@@ -38,7 +41,7 @@ export class PostCard {
   }
 
   getCurrentUser() {
-    this.userService.getCurrentUser()?.subscribe((data:any) => {
+    this.userService.getCurrentUser()?.subscribe((data: any) => {
       if (data && data.id) {
         this.currentUser = data;
       } else {
@@ -61,7 +64,7 @@ export class PostCard {
       this.post.likesUserIds.splice(index, 1);
     }
 
-    this.postService.updatePost(this.post.id, { likesUserIds: this.post.likesUserIds }).subscribe({ 
+    this.postService.updatePost(this.post.id, { likesUserIds: this.post.likesUserIds }).subscribe({
       next: (updatedPost) => {
         this.post = updatedPost;
       },
@@ -71,4 +74,18 @@ export class PostCard {
     });
 
   }
+
+  editCancel(event: boolean) {
+    this.isEditing = false;
+
+    if(!event) {
+      this.post = { ...this.initialPost };
+    }
+  }
+
+  newPost(event: any) {
+    this.post = event;
+    this.isEditing = false;
+  }
+
 }

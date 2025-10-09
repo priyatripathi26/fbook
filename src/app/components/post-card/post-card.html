@@ -1,3 +1,4 @@
+@if(!isEditing) {
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
     <div class="d-flex flex-wrap w-100 post-wrapper">
         <div class="d-flex flex-wrap justify-content-between w-100 align-items-center">
@@ -17,17 +18,22 @@
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         @if(author.id == currentUser.id) {
-                            <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Edit <i class="bi bi-pencil"></i></a></li>
-                            @if(post.hidden) {
-                                <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Unhide <i class="bi bi-eye"></i></a></li>
-                            } @else {
-                                <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Hide <i class="bi bi-eye-slash"></i></a></li>
-                            }
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted"
+                                (click)="isEditing=true">Edit <i class="bi bi-pencil"></i></a></li>
+                        @if(post.hidden) {
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Unhide
+                                <i class="bi bi-eye"></i></a></li>
+                        } @else {
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Hide
+                                <i class="bi bi-eye-slash"></i></a></li>
+                        }
                         }
                         @if(currentUser.role == 'admin' && author.id != currentUser.id) {
-                            <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Block <i class="bi bi-ban"></i></a></li>
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Block
+                                <i class="bi bi-ban"></i></a></li>
                         }
-                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Delete <i class="bi bi-trash"></i></a></li>
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Delete
+                                <i class="bi bi-trash"></i></a></li>
                     </ul>
                 </div>
                 }
@@ -59,3 +65,6 @@
         </div>
     </div>
 </div>
+} @else {
+    <app-edit-post [post]="post" (close)="editCancel($event)" (newPost)="newPost($event)"></app-edit-post>
+}

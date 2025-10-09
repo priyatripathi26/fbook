@@ -19,8 +19,17 @@
             </div>
             @if(!isEdit) {
             <div class="mt-2 w-100 d-flex flex-wrap justify-content-between border-top pt-2">
-                <button type="submit" class="btn btn-outline-success btn-sm" [disabled]="!post.text && !post?.image">Publish</button>
-                <button class="btn btn-outline-danger btn-sm" type="reset" (click)="$event.preventDefault(); closeCard()">Cancel</button>
+                <button type="submit" class="btn btn-outline-success btn-sm"
+                    [disabled]="!post.text && !post?.image">Publish</button>
+                <button class="btn btn-outline-danger btn-sm" type="reset"
+                    (click)="$event.preventDefault(); closeCard()">Cancel</button>
+            </div>
+            } @else {
+            <div class="mt-2 w-100 d-flex flex-wrap justify-content-between border-top pt-2">
+                <button type="submit" class="btn btn-outline-success btn-sm"
+                    [disabled]="!post.text && !post?.image">Update</button>
+                <button class="btn btn-outline-danger btn-sm" type="reset"
+                    (click)="$event.preventDefault(); closeCard()">Cancel</button>
             </div>
             }
             @if(success) {
@@ -30,7 +39,7 @@
             }
             @if(error) {
             <div class="alert alert-danger w-100 text-center mt-2" role="alert">
-                {{ error }}  
+                {{ error }}
             </div>
             }
         </form>

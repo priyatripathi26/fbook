@@ -25,11 +25,20 @@ export class EditPost {
     "blocked": false
   };
   @Output() close = new EventEmitter<boolean>();
+  @Output() newPost = new EventEmitter<any>();
 
   constructor(
     private userService: User,
     private postService: Post
   ) { }
+
+  ngOnChanges() {
+    if(this.post && this.post.id) {
+      this.isEdit = true;
+    } else {
+      this.isEdit = false;
+    }
+  }
 
   createOrUpdate(form: NgForm) {
     if ((!form.value.text || form.value.text.trim().length < 1) && (!form.value.image || form.value.image.trim().length < 1)) {
@@ -38,6 +47,8 @@ export class EditPost {
     }
     if (!this.isEdit) {
       this.createPost(form);
+    } else {
+      this.updatePost(form);
     }
   }
 
@@ -67,6 +78,36 @@ export class EditPost {
       console.error('Error creating post:', error);
     });
 
+  }
+
+  updatePost(form: NgForm) {
+    let userId = this.userService.getCurrentUserId();
+    if(!userId || userId !== this.post.userId) {
+      this.error = 'User not logged in or invalid';
+      return;
+    }
+
+
+    if (!this.post || !this.post.id) {
+      this.error = 'Invalid post';
+      return;
+    }
+    let updatedPost = {
+      text: form.value.text,
+      image: form.value.image
+    };
+    this.postService.updatePost(this.post.id, updatedPost).subscribe(post => {
+      this.success = 'Post updated successfully';
+      this.error = '';
+      this.newPost.emit(post);
+      setTimeout(() => {
+        this.closeCard(true);
+      }, 1000);
+    }, error => {
+      this.error = 'Error updating post';
+      this.success = '';
+      console.error('Error updating post:', error);
+    });
   }
 
   onInput() { }
