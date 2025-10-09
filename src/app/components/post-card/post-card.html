@@ -1,10 +1,36 @@
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
     <div class="d-flex flex-wrap w-100 post-wrapper">
-        <div class="d-flex flex-wrap justify-content-start w-100 align-items-center">
-            <app-user-profile-icon [user]="author" size="md"></app-user-profile-icon>
-            <div class="ms-3">
-                <h6 class="mb-0">{{ author?.first_name }} {{ author?.last_name }}</h6>
-                <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp | date:'medium' }}</small>        
+        <div class="d-flex flex-wrap justify-content-between w-100 align-items-center">
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+                <app-user-profile-icon [user]="author" size="md"></app-user-profile-icon>
+                <div class="ms-3">
+                    <h6 class="mb-0">{{ author?.first_name }} {{ author?.last_name }}</h6>
+                    <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp | date:'medium' }}</small>
+                </div>
+            </div>
+            <div>
+                @if (author.id == currentUser.id || currentUser.role == 'admin') {
+                <div class="dropdown">
+                    <span id="dropdownMenuButton1" class="text-primary" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-sliders"></i>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @if(author.id == currentUser.id) {
+                            <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Edit <i class="bi bi-pencil"></i></a></li>
+                            @if(post.hidden) {
+                                <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Unhide <i class="bi bi-eye"></i></a></li>
+                            } @else {
+                                <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Hide <i class="bi bi-eye-slash"></i></a></li>
+                            }
+                        }
+                        @if(currentUser.role == 'admin' && author.id != currentUser.id) {
+                            <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Block <i class="bi bi-ban"></i></a></li>
+                        }
+                        <li><a class="dropdown-item d-flex flex-wrap justify-content-between text-muted" href="#">Delete <i class="bi bi-trash"></i></a></li>
+                    </ul>
+                </div>
+                }
             </div>
         </div>
         @if(post?.image && post?.image.length > 0) {
@@ -23,9 +49,9 @@
             <div class="me-4 text-secondary">
                 <a href="#" (click)="$event.preventDefault(); toggleLike()" class="text-decoration-none text-info">
                     @if(post.likesUserIds.indexOf(currentUser.id) >= 0) {
-                        <i class="bi bi-hand-thumbs-up-fill"></i>
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
                     } @else {
-                         <i class="bi bi-hand-thumbs-up"></i>
+                    <i class="bi bi-hand-thumbs-up"></i>
                     }
                 </a>
                 <span class="ms-2">{{ post.likesUserIds.length }}</span>
