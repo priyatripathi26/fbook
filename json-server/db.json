@@ -10,26 +10,26 @@
       "role": "admin",
       "blocked": false,
       "friends": [
-        "2"
+        "2",
+        "4"
       ],
       "sent_friend_requests": [
         "3"
       ],
-      "received_friend_requests": [
-        "4"
-      ]
+      "received_friend_requests": []
     },
     {
       "id": "2",
-      "first_name": "Vinayak",
-      "last_name": "Tripathi",
+      "first_name": "GI",
+      "last_name": "Joe",
       "email": "vin@example.com",
       "password": "123456",
       "role": "user",
       "blocked": false,
       "profile_picture": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
       "friends": [
-        "1"
+        "1",
+        "b99e"
       ],
       "sent_friend_requests": [
         "3"
@@ -61,10 +61,25 @@
       "role": "user",
       "blocked": false,
       "profile_picture": "",
-      "friends": [],
-      "sent_friend_requests": [
+      "friends": [
         "1"
       ],
+      "sent_friend_requests": [],
+      "received_friend_requests": []
+    },
+    {
+      "id": "b99e",
+      "first_name": "Johny",
+      "last_name": "Depp",
+      "email": "johnydepp@example.com",
+      "password": "password",
+      "role": "user",
+      "blocked": false,
+      "profile_picture": "https://www.zdf.de/assets/the-true-story-of-johnny-depp-106~640x720?cb=1742310759785",
+      "friends": [
+        "2"
+      ],
+      "sent_friend_requests": [],
       "received_friend_requests": []
     }
   ],
@@ -117,7 +132,7 @@
       "likesUserIds": [
         "1"
       ],
-      "hidden": true,
+      "hidden": false,
       "blocked": false
     },
     {
@@ -128,6 +143,19 @@
       "userId": "2",
       "likesUserIds": [
         "1"
+      ],
+      "hidden": false,
+      "blocked": false
+    },
+    {
+      "id": "95b7",
+      "text": "Dummy Text",
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/041/880/991/small_2x/ai-generated-pic-artistic-depiction-of-sunflowers-under-a-vast-cloudy-sky-photo.jpg",
+      "timestamp": 1760043776476,
+      "userId": "1",
+      "likesUserIds": [
+        "1",
+        "2"
       ],
       "hidden": false,
       "blocked": false
