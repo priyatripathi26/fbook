@@ -12,8 +12,12 @@
       "friends": [
         "2"
       ],
-      "sent_friend_requests": [],
-      "received_friend_requests": []
+      "sent_friend_requests": [
+        "3"
+      ],
+      "received_friend_requests": [
+        "4"
+      ]
     },
     {
       "id": "2",
@@ -44,8 +48,24 @@
       "friends": [],
       "sent_friend_requests": [],
       "received_friend_requests": [
-        "2"
+        "2",
+        "1"
       ]
+    },
+    {
+      "id": "4",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "password": "123456",
+      "role": "user",
+      "blocked": false,
+      "profile_picture": "",
+      "friends": [],
+      "sent_friend_requests": [
+        "1"
+      ],
+      "received_friend_requests": []
     }
   ],
   "posts": [
