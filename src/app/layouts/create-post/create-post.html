@@ -1,0 +1,8 @@
+<div class="w-100 p-1 bg-white d-flex flex-wrap justify-content-center border border-info rounded mb-4 create-post-button"
+    (click)="toggle()">
+    <i class="bi bi-plus-circle-dotted text-info fs-2"></i>
+</div>
+
+@if(opened) {
+<app-edit-post (close)="toggle($event)"></app-edit-post>
+}

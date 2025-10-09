@@ -1,6 +1,9 @@
 <div class="row justify-content-center">
     <div class="col-lg-6 col-md-9 justify-content-center">
         <div class="d-flex flex-wrap post-wrapper">
+
+            <app-create-post class="w-100" (newPost)="newPostAdded($event)"></app-create-post>
+
             @for (post of posts; track post.id) {
             <app-post-card class="w-100" [post]="post"></app-post-card>
             } @empty {

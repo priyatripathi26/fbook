@@ -4,7 +4,7 @@
             <app-user-profile-icon [user]="author" size="md"></app-user-profile-icon>
             <div class="ms-3">
                 <h6 class="mb-0">{{ author?.first_name }} {{ author?.last_name }}</h6>
-                <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp * 1000 | date:'medium' }}</small>        
+                <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp | date:'medium' }}</small>        
             </div>
         </div>
         @if(post?.image && post?.image.length > 0) {

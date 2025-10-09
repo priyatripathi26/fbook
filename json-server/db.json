@@ -14,7 +14,7 @@
       "received_friend_requests": []
     },
     {
-      "id": "fbc3",
+      "id": "2",
       "first_name": "Vinayak",
       "last_name": "Tripathi",
       "email": "vin@example.com",
@@ -27,7 +27,7 @@
       "received_friend_requests": []
     },
     {
-      "id": "4099",
+      "id": "3",
       "first_name": "pr",
       "last_name": "tr",
       "email": "priya1@example.com",
@@ -46,10 +46,34 @@
       "text": "Local JSON Server Setup",
       "image": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
       "userId": "1",
-      "timestamp": 1759921724,
+      "timestamp": 1759921724000,
       "likesUserIds": [
-        "1",
-        "fbc3"
+        "fbc3",
+        "1"
+      ],
+      "hidden": false,
+      "blocked": false
+    },
+    {
+      "id": "102",
+      "text": "",
+      "image": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg",
+      "timestamp": 1760011681907,
+      "userId": "1",
+      "likesUserIds": [
+        "2"
+      ],
+      "hidden": false,
+      "blocked": false
+    },
+    {
+      "id": "88fc",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "image": "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg",
+      "timestamp": 1760012416114,
+      "userId": "2",
+      "likesUserIds": [
+        "2"
       ],
       "hidden": false,
       "blocked": false

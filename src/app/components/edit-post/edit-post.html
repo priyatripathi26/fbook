@@ -1,0 +1,39 @@
+<div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
+    <div class="d-flex flex-wrap w-100 post-wrapper">
+        @if(post) {
+        <form #postForm="ngForm" (ngSubmit)="createOrUpdate(postForm)" class="w-100">
+            <div class="w-100">
+                <label for="image" class="form-label text-info">Image URL</label>
+                <input (input)="onInput()" name="image" class="form-control" id="image" [(ngModel)]="post.image"
+                    class="form-control" #image="ngModel">
+            </div>
+            @if(post?.image && post?.image.length > 0) {
+            <div class="w-100 mt-3 bg-secondary bg-gradient rounded">
+                <img class="w-100 object-fit-contain rounded post-image" [src]="post?.image" [alt]="post.text">
+            </div>
+            }
+
+            <div class="w-100 mt-2">
+                <textarea (input)="onInput()" name="text" class="form-control" id="text" [(ngModel)]="post.text"
+                    rows="3" class="form-control" #text="ngModel"></textarea>
+            </div>
+            @if(!isEdit) {
+            <div class="mt-2 w-100 d-flex flex-wrap justify-content-between border-top pt-2">
+                <button type="submit" class="btn btn-outline-success btn-sm" [disabled]="!post.text && !post?.image">Publish</button>
+                <button class="btn btn-outline-danger btn-sm" type="reset" (click)="$event.preventDefault(); closeCard()">Cancel</button>
+            </div>
+            }
+            @if(success) {
+            <div class="alert alert-success w-100 text-center mt-2" role="alert">
+                {{ success }}
+            </div>
+            }
+            @if(error) {
+            <div class="alert alert-danger w-100 text-center mt-2" role="alert">
+                {{ error }}  
+            </div>
+            }
+        </form>
+        }
+    </div>
+</div>
