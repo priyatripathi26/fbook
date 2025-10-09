@@ -1,0 +1,37 @@
+@if( user && (!user?.blocked || currentUser.role == 'admin')){
+<div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
+    <div class="d-flex flex-wrap w-100 post-wrapper">
+        <div class="d-flex flex-wrap justify-content-between w-100 align-items-center">
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+                <app-user-profile-icon [user]="user" size="md"></app-user-profile-icon>
+                <div class="ms-3">
+                    <h6 class="mb-0">{{ user?.first_name }} {{ user?.last_name }}</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2 w-100 d-flex flex-wrap border-top pt-2">
+            <div class="me-4 text-secondary">
+                @if(currentUser.role == 'admin') {
+
+                @if(user.blocked) {
+                <a href="#" (click)="$event.preventDefault(); unblockUser()" class="text-decoration-none text-success">
+                    <i class="bi bi-ban"></i>
+                </a>
+                } @else {
+                <a href="#" (click)="$event.preventDefault(); blockUser()"
+                    class="text-decoration-none text-info danger">
+                    <i class="bi bi-ban"></i>
+                </a>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(blockingUser || unblockingUser) {
+<app-confirmation-modal [message]="confirmationMassege" [isDanger]="danger"
+    (isConfirmed)="confirmRes($event)"></app-confirmation-modal>
+}
+}

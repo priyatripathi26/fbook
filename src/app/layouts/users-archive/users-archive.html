@@ -1,0 +1,14 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-9 justify-content-center">
+        <div class="d-flex flex-wrap post-wrapper">
+
+            @for (user of allUsers; track user.id) {
+            <app-user-card class="w-100" [user]="user"></app-user-card>
+            } @empty {
+            <div class="alert alert-info w-100 text-center" role="alert">
+                No Users available.
+            </div>
+            }
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { ForgotPassword } from './forgot-password/forgot-password';
 import { Setting } from './pages/setting/setting';
 import { AllPosts } from './pages/all-posts/all-posts';
 import { MyPosts } from './pages/my-posts/my-posts';
+import { AllUsers } from './pages/all-users/all-users';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'setting', component: Setting },
     { path: 'posts', component: AllPosts },
     { path: 'my-posts', component: MyPosts },
+    { path: 'users', component: AllUsers },
 
 ];

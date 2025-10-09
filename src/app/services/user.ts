@@ -51,6 +51,10 @@ export class User {
     return this.http.get<any>(`/api/users/${id}`);
   }
 
+  getAllUsers() {
+    return this.http.get<any[]>(`/api/users`);
+  }
+
   register(user: any) {
     user.role = 'user';
     user.blocked = false;
