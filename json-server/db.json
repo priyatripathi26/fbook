@@ -10,10 +10,10 @@
       "role": "admin",
       "blocked": false,
       "friends": [],
-      "sent_friend_requests": [
+      "sent_friend_requests": [],
+      "received_friend_requests": [
         "2"
-      ],
-      "received_friend_requests": []
+      ]
     },
     {
       "id": "2",
@@ -26,11 +26,10 @@
       "profile_picture": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
       "friends": [],
       "sent_friend_requests": [
-        "3"
-      ],
-      "received_friend_requests": [
+        "3",
         "1"
-      ]
+      ],
+      "received_friend_requests": []
     },
     {
       "id": "3",

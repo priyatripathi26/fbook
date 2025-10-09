@@ -99,7 +99,35 @@ export class UserCard {
     });
   }
 
-  acceptRequest(){}
+  acceptRequest(){
+    if (!this.user || !this.user.id || !this.currentUser || !this.currentUser.id) return;
+    let updatedCurrentUserFriends = this.currentUser.friends || [];
+    let updatedUserFriends = this.user.friends || [];
+    let updatedCurrentUserReceivedRequests = this.currentUser.received_friend_requests?.filter((id: any) => id !== this.user.id) || [];
+    let updatedUserSentRequests = this.user.sent_friend_requests?.filter((id: any) => id !== this.currentUser.id) || [];
+    if(!updatedCurrentUserFriends.includes(this.user.id)){
+      updatedCurrentUserFriends.push(this.user.id);
+    }
+    if(!updatedUserFriends.includes(this.currentUser.id)){
+      updatedUserFriends.push(this.currentUser.id);
+    }
+    this.userService.updateUser(this.currentUser.id, { friends: updatedCurrentUserFriends, received_friend_requests: updatedCurrentUserReceivedRequests }).subscribe({
+      next: (updatedCurrentUser) => {
+        this.currentUser = updatedCurrentUser;
+        this.userService.updateUser(this.user.id, { friends: updatedUserFriends, sent_friend_requests: updatedUserSentRequests }).subscribe({
+          next: (updatedUser) => {
+            this.user = updatedUser;
+          },
+          error: (error) => {
+            console.error('Error updating user friends:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error updating current user friends:', error);
+      }
+    });
+  }
 
   declineRequest(){}
   
