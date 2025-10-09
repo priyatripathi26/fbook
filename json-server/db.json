@@ -9,7 +9,9 @@
       "profile_picture": "https://plus.unsplash.com/premium_photo-1664298528358-790433ba0815",
       "role": "admin",
       "blocked": false,
-      "friends": [],
+      "friends": [
+        "2"
+      ],
       "sent_friend_requests": [],
       "received_friend_requests": []
     },
@@ -22,7 +24,9 @@
       "role": "user",
       "blocked": false,
       "profile_picture": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
-      "friends": [],
+      "friends": [
+        "1"
+      ],
       "sent_friend_requests": [
         "3"
       ],
