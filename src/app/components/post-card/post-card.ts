@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../services/user';
 import { UserProfileIcon } from '../user-profile-icon/user-profile-icon';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { Post } from '../../services/post';
 import { EditPost } from '../edit-post/edit-post';
 import { ConfirmationModal } from '../confirmation-modal/confirmation-modal';
 
 @Component({
   selector: 'app-post-card',
-  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal],
+  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal, NgClass],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css'
 })
@@ -22,6 +22,7 @@ export class PostCard {
   unhidingPost: boolean = false;
   deletingPost: boolean = false;
   blockingPost: boolean = false;
+  unblockingPost: boolean = false;
   confirmationMassege: string = '';
   danger: boolean = false;
   constructor(
@@ -112,13 +113,18 @@ export class PostCard {
 
   blockPost() {
     this.resetConfirmation();
-    console.log(this.post);
     if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || this.currentUser.role != 'admin') return;
     this.confirmationMassege = 'Are you sure you want to block this post?';
     this.danger = true
     this.blockingPost = true;
   }
-  unblockPost() {}
+  unblockPost() {
+    this.resetConfirmation();
+    if (!this.post || !this.post.id || !this.currentUser || !this.currentUser.id || this.currentUser.role != 'admin') return;
+    this.confirmationMassege = 'Are you sure you want to unblock this post?';
+    this.danger = false
+    this.unblockingPost = true;
+  }
   
   deletePost() {
     this.resetConfirmation();
@@ -149,6 +155,10 @@ export class PostCard {
         this.resetConfirmation();
         this.blockPostApi();
       }
+      if (this.unblockingPost) {
+        this.resetConfirmation();
+        this.unblockPostApi();
+      }
     }
 
     this.resetConfirmation();
@@ -168,6 +178,18 @@ export class PostCard {
 
    blockPostApi() {
     let postData = { blocked: true };
+    this.postService.updatePost(this.post.id, postData).subscribe({
+      next: (updatedPost) => {
+        this.post = updatedPost;
+      },
+      error: (error) => {
+        console.error('Error blocking post:', error);
+      }
+    });
+  }
+
+   unblockPostApi() {
+    let postData = { blocked: false };
     this.postService.updatePost(this.post.id, postData).subscribe({
       next: (updatedPost) => {
         this.post = updatedPost;
@@ -205,6 +227,7 @@ export class PostCard {
     this.unhidingPost = false;
     this.deletingPost = false;
     this.blockingPost = false;
+    this.unblockingPost = false;
     this.confirmationMassege = '';
     this.danger = false;
   }
