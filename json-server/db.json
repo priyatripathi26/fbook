@@ -44,10 +44,15 @@
     {
       "id": "101",
       "text": "Local JSON Server Setup",
-      "image": "https://json-server.typicode.com/typicode/demo/posts",
-      "userId": 1,
+      "image": "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
+      "userId": "1",
       "timestamp": 1759921724,
-      "likesUserIds": []
+      "likesUserIds": [
+        "1",
+        "fbc3"
+      ],
+      "hidden": false,
+      "blocked": false
     }
   ]
 }

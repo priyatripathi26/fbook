@@ -29,8 +29,26 @@ export class User {
     }
   }
 
-  updateUser(id: number, changedData: any) {
+   getCurrentUserId() {
+    let user = localStorage.getItem('loggedInUser');
+    if (!user) {
+      return null;
+    } else {
+      let userData = JSON.parse(user);
+      if(userData && userData.id) {
+        return userData.id;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  updateUser(id: any, changedData: any) {
     return this.http.patch<any>(`/api/users/${id}`, changedData);
+  }
+
+  getUserById(id: any) {
+    return this.http.get<any>(`/api/users/${id}`);
   }
 
   register(user: any) {
@@ -63,7 +81,7 @@ export class User {
 
         const userData = existing[0];
         return this.http.patch<any>(
-          `http://localhost:3000/users/${userData.id}`,
+          `/api/users/${userData.id}`,
           { password: password }
         );
       }),

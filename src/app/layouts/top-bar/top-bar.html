@@ -10,17 +10,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-person-hearts"></i> Network</a>
                 </li>
-                <li class="nav-item" *ngIf="isAdmin">
-                    <a class="nav-link" href="#"><i class="bi bi-person-lines-fill"></i> Users</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                         aria-expanded="false">
                         <span class="align-top me-1 text-success">Hi {{ user?.first_name }}! </span>
+                        @if(user?.role == 'admin') {
+                            <span class="text-secondary align-top me-1 blockquote-footer">Super Admin</span>
+                        }
                         <app-user-profile-icon [user]="user"></app-user-profile-icon>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" [routerLink]="['/setting']">Posts <i class="ms-3 bi bi-view-list"></i></a></li>
+
                         <li><a class="dropdown-item" [routerLink]="['/setting']">Setting <i class="ms-3 bi bi-gear"></i></a></li>
+                        @if(user?.role == 'admin') {
+                            <li>
+                                <a class="dropdown-item" href="#">Users <i class="bi bi-person-lines-fill ms-3"></i></a>
+                            </li>
+                        }
                         <li>
                             <hr class="dropdown-divider">
                         </li>

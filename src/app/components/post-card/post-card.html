@@ -1,0 +1,35 @@
+<div class="w-100 p-4 bg-white shadow-sm rounded mb-4">
+    <div class="d-flex flex-wrap w-100 post-wrapper">
+        <div class="d-flex flex-wrap justify-content-start w-100 align-items-center">
+            <app-user-profile-icon [user]="author" size="md"></app-user-profile-icon>
+            <div class="ms-3">
+                <h6 class="mb-0">{{ author?.first_name }} {{ author?.last_name }}</h6>
+                <small class="text-muted font-small mt-0">Posted on {{ post?.timestamp * 1000 | date:'medium' }}</small>        
+            </div>
+        </div>
+        @if(post?.image && post?.image.length > 0) {
+        <div class="w-100 mt-3 bg-secondary bg-gradient rounded">
+            <img class="w-100 object-fit-contain rounded post-image" [src]="post?.image" [alt]="post.text">
+        </div>
+        }
+
+        @if(post?.text && post?.text.length > 0) {
+        <div class="w-100 mt-2">
+            <p class="fs-6">{{ post?.text }}</p>
+        </div>
+        }
+
+        <div class="mt-2 w-100 d-flex flex-wrap border-top pt-2">
+            <div class="me-4 text-secondary">
+                <a href="#" (click)="$event.preventDefault(); toggleLike()" class="text-decoration-none text-info">
+                    @if(post.likesUserIds.indexOf(currentUser.id) >= 0) {
+                        <i class="bi bi-hand-thumbs-up-fill"></i>
+                    } @else {
+                         <i class="bi bi-hand-thumbs-up"></i>
+                    }
+                </a>
+                <span class="ms-2">{{ post.likesUserIds.length }}</span>
+            </div>
+        </div>
+    </div>
+</div>

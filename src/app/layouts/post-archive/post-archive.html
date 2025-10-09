@@ -1,0 +1,13 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-9 justify-content-center">
+        <div class="d-flex flex-wrap post-wrapper">
+            @for (post of posts; track post.id) {
+            <app-post-card class="w-100" [post]="post"></app-post-card>
+            } @empty {
+            <div class="alert alert-info w-100 text-center" role="alert">
+                No posts available.
+            </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { User } from '../../services/user';
 import { UserProfileIcon } from "../../components/user-profile-icon/user-profile-icon";
-import { NgIf } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
-  imports: [UserProfileIcon, NgIf, RouterLink, RouterLinkActive],
+  imports: [UserProfileIcon, RouterLink, RouterLinkActive],
   templateUrl: './top-bar.html',
   styleUrl: './top-bar.css'
 })
