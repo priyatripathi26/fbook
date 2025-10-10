@@ -5,10 +5,11 @@ import { DatePipe, NgClass } from '@angular/common';
 import { Post } from '../../services/post';
 import { EditPost } from '../edit-post/edit-post';
 import { ConfirmationModal } from '../confirmation-modal/confirmation-modal';
+import { TooltipDirective } from '../../shared/tooltip';
 
 @Component({
   selector: 'app-post-card',
-  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal, NgClass],
+  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal, NgClass, TooltipDirective],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css'
 })

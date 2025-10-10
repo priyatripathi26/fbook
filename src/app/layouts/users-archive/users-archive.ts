@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { UserCard } from "../../compoments/user-card/user-card";
 import { User } from '../../services/user';
+import { ProfileSidebar } from "../../components/profile-sidebar/profile-sidebar";
 
 @Component({
   selector: 'app-users-archive',
-  imports: [UserCard],
+  imports: [UserCard, ProfileSidebar],
   templateUrl: './users-archive.html',
   styleUrl: './users-archive.css'
 })
