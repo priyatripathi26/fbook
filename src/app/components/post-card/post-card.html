@@ -3,7 +3,7 @@
 <div class="w-100 p-4 bg-white shadow-sm rounded mb-4" [ngClass]="{'opacity-50 ': post?.blocked}">
     <div class="d-flex flex-wrap w-100 post-wrapper">
         <div class="d-flex flex-wrap justify-content-between w-100 align-items-center">
-            <div class="d-flex flex-wrap justify-content-start align-items-center">
+            <div class="d-flex flex-wrap justify-content-start align-items-center profile-link" [routerLink]="['/profile', author?.id]" style="cursor:pointer">
                 <app-user-profile-icon [user]="author" size="md"></app-user-profile-icon>
                 <div class="ms-3">
                     <h6 class="mb-0">{{ author?.first_name }} {{ author?.last_name }}

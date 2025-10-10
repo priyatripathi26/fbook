@@ -6,10 +6,11 @@ import { Post } from '../../services/post';
 import { EditPost } from '../edit-post/edit-post';
 import { ConfirmationModal } from '../confirmation-modal/confirmation-modal';
 import { TooltipDirective } from '../../shared/tooltip';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
-  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal, NgClass, TooltipDirective],
+  imports: [UserProfileIcon, DatePipe, EditPost, ConfirmationModal, NgClass, TooltipDirective, RouterLink],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css'
 })

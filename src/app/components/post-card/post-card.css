@@ -6,3 +6,6 @@
 .post-image {
     max-height: 300px;
 }
+.profile-link:hover h6 {
+    color: rgb(0, 136, 247);
+}

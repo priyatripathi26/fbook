@@ -3,10 +3,11 @@ import { User } from '../../services/user';
 import { UserProfileIcon } from "../../components/user-profile-icon/user-profile-icon";
 import { ConfirmationModal } from "../../components/confirmation-modal/confirmation-modal";
 import { TooltipDirective } from '../../shared/tooltip';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-card',
-  imports: [UserProfileIcon, ConfirmationModal, TooltipDirective],
+  imports: [UserProfileIcon, ConfirmationModal, TooltipDirective, RouterLink],
   templateUrl: './user-card.html',
   styleUrl: './user-card.css'
 })
