@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { UserCard } from "../../compoments/user-card/user-card";
 import { User } from '../../services/user';
 import { ProfileSidebar } from "../../components/profile-sidebar/profile-sidebar";
+import { ProfileCard } from '../../compoments/profile-card/profile-card';
 
 @Component({
   selector: 'app-profile-block',
-  imports: [UserCard, ProfileSidebar],
+  imports: [UserCard, ProfileCard],
   templateUrl: './profile-block.html',
   styleUrl: './profile-block.css'
 })
