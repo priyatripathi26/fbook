@@ -3,3 +3,9 @@
     margin: 0 auto;
     padding: 1rem;
 }
+
+.profile-sidebar {
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}

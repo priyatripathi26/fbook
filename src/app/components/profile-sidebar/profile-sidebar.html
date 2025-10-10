@@ -1,0 +1,16 @@
+<div class="position-fixed profile-sidebar w-100">
+    <div class="w-100 d-flex flex-wrap p-2 bg-white shadow-sm rounded">
+        <div class="w-100 d-flex flex-wrap justify-content-center p-3">
+            <app-user-profile-icon class="w-100 d-flex flex-wrap justify-content-center" [user]="user" [smallSize]="false"></app-user-profile-icon>
+        </div>
+        <div class="d-flex w-100 flex-wrap justify-content-center text-center">
+            <a class="text-decoration-none text-info font-bold fs-5" [routerLink]="['/setting']"> {{ user?.first_name }} {{ user?.last_name }} </a>
+        </div>
+        <div class="d-flex w-100 flex-wrap justify-content-center text-center border-top pt-2 mt-3">
+            <a class="text-decoration-none text-primary" [routerLink]="['/my-posts']" appTooltip="Posts"> <i class="bi bi-view-list"></i> {{ posts.length }} </a>
+        </div>
+
+        <div class="d-flex w-100 flex-wrap justify-content-center text-center mt-1">
+            <a class="text-decoration-none text-success" [routerLink]="['/network']" appTooltip="Friends"> <i class="bi bi-people"></i> {{ user?.friends?.length }} </a>
+        </div>
+    </div>

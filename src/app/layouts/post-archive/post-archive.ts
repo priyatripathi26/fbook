@@ -3,10 +3,11 @@ import { Post } from '../../services/post';
 import { User } from '../../services/user';
 import { PostCard } from '../../components/post-card/post-card';
 import { CreatePost } from "../create-post/create-post";
+import { ProfileSidebar } from "../../components/profile-sidebar/profile-sidebar";
 
 @Component({
   selector: 'app-post-archive',
-  imports: [PostCard, CreatePost],
+  imports: [PostCard, CreatePost, ProfileSidebar],
   templateUrl: './post-archive.html',
   styleUrl: './post-archive.css'
 })
