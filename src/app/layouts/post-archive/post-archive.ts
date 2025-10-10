@@ -14,6 +14,9 @@ import { ProfileSidebar } from "../../components/profile-sidebar/profile-sidebar
 export class PostArchive {
   @Input() isSelf: boolean = false;
   @Input() canCreatePost: boolean = true;
+  @Input() showProfileSideBar: boolean = true;
+  @Input() forceUser: boolean = false;
+  @Input() forceUserId: any = '';
   currentUserId: any = null;
   posts: any[] = [];
 
@@ -39,6 +42,9 @@ export class PostArchive {
     let userId = '';
     if (this.isSelf) {
       userId = this.currentUserId;
+    }
+    if(this.forceUser && this.forceUserId) {
+      userId = this.forceUserId;
     }
     this.postService.getPosts(userId).subscribe(posts => {
       posts.sort((a, b) => b.timestamp - a.timestamp);

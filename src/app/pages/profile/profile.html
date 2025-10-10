@@ -1,1 +1,6 @@
-<p>profile works!</p>
+<app-top-bar></app-top-bar>
+
+<div class="container px-5 py-4">
+    <app-profile-block [userId]="userId"></app-profile-block>
+    <app-post-archive [isSelf]="false" [canCreatePost]="false" [showProfileSideBar]="false" [forceUser]="true" [forceUserId]="userId"></app-post-archive>
+</div>

@@ -1,7 +1,9 @@
 <div class="row justify-content-center">
+    @if(showProfileSideBar) {
     <div class="col-lg-3 col-md-3 col-0 profile-sidebar position-relative p-3">
         <app-profile-sidebar></app-profile-sidebar>
     </div>
+    }
     <div class="col-lg-6 col-md-9 justify-content-center">
         <div class="d-flex flex-wrap post-wrapper">
             @if(canCreatePost) {
@@ -17,5 +19,7 @@
             }
         </div>
     </div>
+    @if(showProfileSideBar) {
     <div class="col-lg-3"></div>
+    }
 </div>

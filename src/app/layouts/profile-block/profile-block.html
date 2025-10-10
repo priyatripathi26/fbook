@@ -1,0 +1,8 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-9 justify-content-center">
+        <div class="d-flex flex-wrap post-wrapper">
+            <app-user-card class="w-100" [user]="profileUser"></app-user-card>
+        </div>
+    </div>
+    <h5 class="text-center text-muted">{{ profileUser?.first_name }} {{ profileUser?.last_name }}'s Posts</h5>
+</div>
